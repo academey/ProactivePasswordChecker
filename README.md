@@ -2,7 +2,7 @@
 # How to run the program
 ```console
 >> pip install
-# Ex) python proactive_password_checker.py dictionary.txt test_candidate2.txt
+# Ex) python proactive_password_checker.py dictionary.txt test_candidate.txt
 >> python proactive_password_checker.py [input file name] [output file name] 
 ``` 
 
