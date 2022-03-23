@@ -1,0 +1,4 @@
+bitarray==2.4.0
+fnvhash==0.1.0
+mmh3==3.0.0
+xxhash==3.0.0
