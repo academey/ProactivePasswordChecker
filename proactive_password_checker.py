@@ -38,7 +38,7 @@ class ProactivePasswordChecker:
         for word in lines:
             is_accepted = self.get_bloom_filter(word)
 
-            data = f"{word.strip()} {is_accepted} \n"
+            data = f"{word.strip()} {is_accepted}\n"
             output_file.write(data)
         output_file.close()
         candidate_file.close()
