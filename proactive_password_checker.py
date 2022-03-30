@@ -28,7 +28,7 @@ class ProactivePasswordChecker:
         dictionary_file = open(self.dictionary_file_name, 'r', encoding=INPUT_FILE_ENCODING)
         lines = dictionary_file.readlines()
         for word in lines:
-            self.set_bloom_filter(word)
+            self.set_bloom_filter(word.strip())
         dictionary_file.close()
 
     def write_output_file_name_using_bloom_filter(self):
@@ -36,7 +36,8 @@ class ProactivePasswordChecker:
         lines = candidate_file.readlines()
         output_file = open(self.output_file_name, 'w')
         for word in lines:
-            is_accepted = self.get_bloom_filter(word)
+            is_accepted = self.get_bloom_filter(word.strip())
+
 
             data = f"{word.strip()} {is_accepted}\n"
             output_file.write(data)
@@ -47,7 +48,6 @@ class ProactivePasswordChecker:
         mm3_index = mmh3.hash(word) % N
         xxhash_index = xxhash.xxh32(word).intdigest() % N
         fnv1a_32_index = fnv1a_32(bytes(word, encoding='utf-8')) % N
-
         self.hash_table[mm3_index] = 1
         self.hash_table[xxhash_index] = 1
         self.hash_table[fnv1a_32_index] = 1
@@ -56,7 +56,6 @@ class ProactivePasswordChecker:
         mm3_index = mmh3.hash(word) % N
         xxhash_index = xxhash.xxh32(word).intdigest() % N
         fnv1a_32_index = fnv1a_32(bytes(word, encoding='utf-8')) % N
-
         is_accepted = 1
 
         if self.hash_table[mm3_index] == 1 and self.hash_table[xxhash_index] == 1 and self.hash_table[
